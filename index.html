@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Автомойка «Чистый путь» — Демо</title>
+  <style>
+    /* =========================================
+       БАЗОВЫЕ НАСТРОЙКИ
+       ========================================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f9f9f9;
+      color: #333;
+      scroll-behavior: smooth; /* Плавная прокрутка по якорям */
+    }
+
+    /* =========================================
+       ШАПКА САЙТА (HEADER)
+       ========================================= */
+    header {
+      background-color: #1a1a1a;
+      color: white;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #00aaff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .menu {
+      display: flex;
+      gap: 30px;
+    }
+
+    .menu a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .menu a:hover {
+      color: #00aaff;
+    }
+
+    .btn-call {
+      background-color: #00aaff;
+      color: white;
+      padding: 10px 25px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .btn-call:hover {
+      background-color: #0088cc;
+    }
+
+    /* =========================================
+       ГЛАВНЫЙ ЭКРАН (HERO)
+       ========================================= */
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('hero-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 0 20px;
+    }
+
+    .hero-content {
+      max-width: 900px;
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      margin-bottom: 20px;
+      line-height: 1.2;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 40px;
+      color: #ddd;
+    }
+
+    .btn-main {
+      background-color: #00aaff;
+      color: white;
+      padding: 18px 50px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: bold;
+      display: inline-block;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0, 170, 255, 0.4);
+    }
+
+    .btn-main:hover {
+      background-color: #0088cc;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 170, 255, 0.6);
+    }
+
+    /* =========================================
+       БЛОК ПРЕИМУЩЕСТВ
+       ========================================= */
+    .features {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .features h2 {
+      font-size: 36px;
+      margin-bottom: 50px;
+      color: #1a1a1a;
+    }
+
+    .features-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 40px 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      flex: 1;
+      transition: transform 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .feature-icon {
+      font-size: 50px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #1a1a1a;
+    }
+
+    .feature-card p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* =========================================
+       БЛОК ЦЕН
+       ========================================= */
+    .prices {
+      padding: 80px 20px;
+      background-color: #1a1a1a;
+      color: white;
+      text-align: center;
+    }
+
+    .prices h2 {
+      font-size: 36px;
+      margin-bottom: 50px;
+      color: white;
+    }
+
+    .prices-grid {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .price-card {
+      background: #2a2a2a;
+      padding: 40px 30px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: left;
+      border: 2px solid #333;
+      transition: border-color 0.3s;
+    }
+
+    .price-card:hover {
+      border-color: #00aaff;
+    }
+
+    .price-card h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #00aaff;
+    }
+
+    .price-card .price-value {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .price-card ul {
+      list-style: none;
+      margin-bottom: 30px;
+      color: #aaa;
+    }
+
+    .price-card ul li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .price-card ul li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #00aaff;
+    }
+
+    .btn-price {
+      display: block;
+      text-align: center;
+      background-color: transparent;
+      color: #00aaff;
+      border: 2px solid #00aaff;
+      padding: 12px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .btn-price:hover {
+      background-color: #00aaff;
+      color: white;
+    }
+
+    /* =========================================
+       НОВЫЙ БЛОК: ФОРМА ЗАЯВКИ (CONTACT)
+       ========================================= */
+    .contact {
+      padding: 80px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #1a1a1a;
+    }
+
+    .contact p {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 500px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .contact-form input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .contact-form input:focus {
+      border-color: #00aaff;
+    }
+
+    .contact-form button {
+      background-color: #00aaff;
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .contact-form button:hover {
+      background-color: #0088cc;
+    }
+
+    /* =========================================
+       НОВЫЙ БЛОК: ПОДВАЛ (FOOTER)
+       ========================================= */
+    footer {
+      background-color: #1a1a1a;
+      color: #aaa;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    footer .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    footer a {
+      color: #00aaff;
+      text-decoration: none;
+    }
+
+    /* =========================================
+       АДАПТИВНОСТЬ
+       ========================================= */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+      }
+      .hero h1 {
+        font-size: 32px;
+      }
+      .hero p {
+        font-size: 16px;
+      }
+      .btn-main {
+        padding: 15px 30px;
+        font-size: 18px;
+      }
+      .features-grid {
+        flex-direction: column;
+      }
+      .prices-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+      footer .footer-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Шапка -->
+  <header>
+    <div class="logo">Чистый путь</div>
+    <nav class="menu">
+      <a href="#services">Услуги</a>
+      <a href="#prices">Цены</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a href="tel:+79000000000" class="btn-call">Позвонить</a>
+  </header>
+
+  <!-- Основной контент -->
+  <main>
+    
+    <!-- Главный экран -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Профессиональная автомойка в Вашем городе</h1>
+        <p>Быстро, качественно и с заботой о вашем автомобиле. Работаем без выходных с 8:00 до 22:00.</p>
+        <a href="#contacts" class="btn-main">Записаться онлайн</a>
+      </div>
+    </section>
+
+    <!-- Блок Преимущества -->
+    <section class="features" id="services">
+      <h2>Почему выбирают нас?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Быстро</h3>
+          <p>Стандартная мойка занимает всего 20 минут. Мы ценим ваше время.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>Безопасно</h3>
+          <p>Используем только сертифицированную химию и мягкие губки.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌟</div>
+          <h3>Качественно</h3>
+          <p>Опытные мастера, которые знают толк в чистоте вашего авто.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Блок Цены -->
+    <section class="prices" id="prices">
+      <h2>Наши услуги и цены</h2>
+      <div class="prices-grid">
+        
+        <div class="price-card">
+          <h3>Экспресс-мойка</h3>
+          <div class="price-value">500 ₽</div>
+          <ul>
+            <li>Мойка кузова</li>
+            <li>Сушка</li>
+            <li>Чернение резины</li>
+            <li>Время: 15 минут</li>
+          </ul>
+          <button class="btn-price" onclick="document.getElementById('contacts').scrollIntoView();">Выбрать</button>
+        </div>
+
+        <div class="price-card">
+          <h3>Комплексная</h3>
+          <div class="price-value">1200 ₽</div>
+          <ul>
+            <li>Мойка кузова</li>
+            <li>Химчистка салона</li>
+            <li>Уборка багажника</li>
+            <li>Время: 40 минут</li>
+          </ul>
+          <button class="btn-price" onclick="document.getElementById('contacts').scrollIntoView();">Выбрать</button>
+        </div>
+
+        <div class="price-card">
+          <h3>Детейлинг</h3>
+          <div class="price-value">4500 ₽</div>
+          <ul>
+            <li>Полировка кузова</li>
+            <li>Керамическое покрытие</li>
+            <li>Химчистка всего салона</li>
+            <li>Время: 3 часа</li>
+          </ul>
+          <button class="btn-price" onclick="document.getElementById('contacts').scrollIntoView();">Выбрать</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- НОВЫЙ БЛОК: Форма заявки -->
+    <section class="contact" id="contacts">
+      <h2>Запишитесь на мойку</h2>
+      <p>Оставьте свой номер телефона, и мы перезвоним вам в течение 5 минут для подтверждения записи.</p>
+      
+      <form class="contact-form">
+        <input type="text" placeholder="Ваше имя" required>
+        <input type="tel" placeholder="Ваш телефон" required>
+        <button type="submit">Записаться</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- НОВЫЙ БЛОК: Подвал -->
+  <footer>
+    <div class="footer-content">
+      <p>© 2024 Автомойка «Чистый путь». Все права защищены.</p>
+      <p>Адрес: г. Вашгород, ул. Примерная, 1</p>
+      <p>Телефон: <a href="tel:+79000000000">+7 (900) 000-00-00</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
